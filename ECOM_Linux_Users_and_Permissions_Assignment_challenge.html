@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Access and User Privileges Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h2 {
+            color: #28a745;
+        }
+
+        ol,ul,li,p, pre {
+            font-size: 18px;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        footer {
+            background-color: hwb(176 74% 5%);
+            color: rgb(8, 8, 8);
+            text-align: center;
+            padding: 1rem 0;
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+		<img src="data:image/png;base64,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" style="display:block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 30%;">
+	</header>
+    <h1 style="color:teal;text-align:center;font-size:65px;">ECOM: Linux Users and Permissions Assignment</h1>
+    <h1>Hands-On Task: Secure File Access and User Privileges Assignment</h1>
+    <h2>Task Instructions:</h2>
+    <ol>
+        <li>
+            <h3>Create Users and Groups:</h3>
+            <ul>
+                <li>Create two users: user1 and user2.</li>
+                <li>Create a group named developers.</li>
+                <li>Add user1 and user2 to the developers group.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Set Permissions:</h3>
+            <ul>
+                <li>Create a directory named project_files.</li>
+                <li>Change the owner of the project_files directory to user1.</li>
+                <li>Change the group of the project_files directory to developers.</li>
+                <li>Set the permissions of the project_files directory to allow read, write, and execute for the owner, and read and execute for the group. Others should not have any permissions.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>File Creation and Permissions:</h3>
+            <ul>
+                <li>Inside the project_files directory, create a file named code.c.</li>
+                <li>Make user1 the owner of the code.c file and grent him read, write and execute permissions.</li>
+                <li>Allow members of the developers group to read and write to the code.c file.</li>
+                <li>Deny all permissions for others.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Sudo Configuration:</h3>
+            <ul>
+                <li>Edit the sudoers file using the visudo command.</li>
+                <li>Allow user1 to execute the apt-get update command with sudo privileges without entering a password.</li>
+                <li>Allow members of the developers group to execute any command with sudo privileges, but they must enter their password.</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Submission:</h3>
+            <ul>
+                <li>Create a text file named permissions_assignment.txt.</li>
+                <li>Document the steps you took to complete the tasks, including the commands used.</li>
+                <li>Provide screenshots showing the terminal commands and their outputs.</li>
+            </ul>
+        </li>
+    </ol>
+    <p><strong>Note:</strong> Ensure that you understand the security implications of the permission settings and sudo configurations. Improper configurations can lead to security vulnerabilities.</p>
+    <footer>
+        <p>&copy; 2023 Ecom School. All rights reserved.</p>
+    </footer>
+</body>
+</html>
